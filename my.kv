@@ -1,0 +1,149 @@
+<ItemLabel@Label>
+    font_size: '15sp'
+
+<ItemTextInput@TextInput>
+    font_size: '19sp'
+
+<ItemButton@Button>
+    font_size: '15sp'
+
+<Container>:
+
+    ord_input: ord_cost
+    pos_input: pos_cost
+    last_ord_input: input_ord
+    today_output: output_today
+
+    background_color: (.14,.74,.34,1)
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    ItemLabel:
+        text: 'За заказ'
+        text_size: self.size
+        size_hint: .5, .18
+        pos_hint: {'top': 1.13, 'x': .05}
+
+    ItemLabel:
+        text: 'За позицию'
+        text_size: self.size
+        size_hint: .5, .18
+        pos_hint: {'top': 1.13, 'right': 1.06}
+
+    ItemTextInput:
+        id: ord_cost
+        text: root.display()[0]
+        multiline: False
+        pos_hint: {'top': .93, 'x': .05}
+        size_hint: .39, .06
+
+    ItemTextInput:
+        id: pos_cost
+        text: root.display()[1]
+        multiline: False
+        pos_hint: {'top': .93, 'right': .95}
+        size_hint: .39, .06
+
+    ItemButton:
+        text: "ВВОД"
+        pos_hint: {'top': .85, 'x': .05}
+        size_hint: .9, .06
+        background_color: .99,.82,.1,1
+        background_normal: ''
+        on_release:
+            root.ord_and_pos()
+
+    ItemLabel:
+        text: 'Введите количество позиций собранного заказа'
+        text_size: self.size
+        size_hint: .89, .2
+        pos_hint: {'center_y': .8, 'x': .07}
+
+    ItemTextInput:
+        id: input_ord
+        multiline: False
+        pos_hint: {'center_y': .66, 'x': .05}
+        size_hint: .39, .06
+
+    ItemButton:
+        text: "ВВОД"
+        size_hint: .39, .06
+        pos_hint: {'center_y': .66, 'right': .95}
+        background_color: .99,.25,.22,1
+        background_normal: ''
+        on_release:
+            root.input_order()
+            root.output_order()
+
+    ItemLabel:
+        text: 'Собрано за сегодня'
+        text_size: self.size
+        size_hint: .9, .2
+        pos_hint: {'center_y': .67, 'x': .07}
+
+    ItemLabel:
+        id: output_today
+        text: root.output_order()
+        text_size: self.size
+        halign:'left'
+        valign:'top'
+        size_hint: .9, .17
+        color: 0,0,0,1
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        pos_hint: {'center_y': .47, 'x': .05}
+        background_color: (1,1,1,1)
+        canvas.before:
+            Color:
+                rgba: self.background_color
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+    ItemButton:
+        text: "СБРОС"
+        size_hint: .9, .06
+        pos_hint: {'center_y': .34, 'x': .05}
+        background_color: .99,.25,.22,1
+        background_normal: ''
+        on_release:
+            root.reset_today()
+            root.output_order()
+
+
+    ItemLabel:
+        text: 'Собрано за последние недели'
+        text_size: self.size
+        size_hint: .9, .22
+        pos_hint: {'center_y': .35, 'x': .07}
+
+    ItemLabel:
+        text: root.output_weekly_orders()
+        text_size: self.size
+        halign:'left'
+        valign:'top'
+        size_hint: .9, .2
+        color: 0,0,0,1
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        pos_hint: {'center_y': .13, 'x': .05}
+        background_color: (1,1,1,1)
+        canvas.before:
+            Color:
+                rgba: self.background_color
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
